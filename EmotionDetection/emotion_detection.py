@@ -32,7 +32,12 @@ def emotion_detector(text_to_analyse):
 
     response_dict = json.loads(response.text)
 
-    # FIX: correctly navigate the dictionary
+    if response.status_code == 400 or "emotionPredictions" not in response_dict:
+        return {
+            "anger": None, "disgust": None, "fear": None,
+            "joy": None, "sadness": None, "dominant_emotion": None
+        }
+
     emotion_data = response_dict["emotionPredictions"][0]["emotion"]
 
     anger = emotion_data["anger"]
