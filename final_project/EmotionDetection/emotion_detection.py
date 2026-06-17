@@ -23,12 +23,29 @@ def emotion_detector(text_to_analyse): # Define a function named emotion_detecto
                 (formatted_response['emotionPredictions'][0]['emotion']['sadness'], "sadness")
         ]
         dominant_emotion = max(data, key=lambda item: item[0])[1]
-
-    return {
-            'anger': data[0][0],
-            'disgust': data[1][0],
-            'fear': data[2][0],
-            'joy': data[3][0],
-            'sadness': data[4][0],
-            'dominant_emotion': dominant_emotion
-    }
+        return {
+                'anger': data[0][0],
+                'disgust': data[1][0],
+                'fear': data[2][0],
+                'joy': data[3][0],
+                'sadness': data[4][0],
+                'dominant_emotion': dominant_emotion
+        }
+    elif response.status_code == 400:
+        return {
+                'anger': None,
+                'disgust': None,
+                'fear': None,
+                'joy': None,
+                'sadness': None,
+                'dominant_emotion': None
+        }
+    else:
+        return {
+                'anger': None,
+                'disgust': None,
+                'fear': None,
+                'joy': None,
+                'sadness': None,
+                'dominant_emotion': None
+        }
